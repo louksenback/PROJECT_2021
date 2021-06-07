@@ -41,7 +41,7 @@ public class main
         org.insertBeneficiary(k);
         
         Menu b = new Menu();
-        b.checkuser(org, RDL, m, o);
+        b.checkuser(org, RDL, m, k, o);
         
         /*Material Milk = new Material("Μilk", "ufyfguw", 1826);
         Service MedicalSupport = new Service("MedicalSupport", "vfgwgfy", 1628);

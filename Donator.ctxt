@@ -2,8 +2,8 @@
 comment0.target=Donator
 comment1.params=name\ phone
 comment1.target=Donator(java.lang.String,\ java.lang.String)
-comment2.params=a\ quantity\ o
-comment2.target=void\ add(RequestDonation,\ double,\ Donator)
+comment2.params=a\ quantity
+comment2.target=void\ add(RequestDonation,\ double)
 comment3.params=w
 comment3.target=void\ remove(RequestDonation)
 comment4.params=o

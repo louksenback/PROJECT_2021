@@ -44,6 +44,20 @@ public class Beneficiary extends User
     {
         return receivedList;
     }
+    public Requests getRequestsList()
+    {
+        return requestsList;
+    }
+    
+    
+    public void add(RequestDonation a, double quantity)
+    {
+        RequestDonation p = new RequestDonation(a.getEntity(), quantity);
+        requestsList.rdEntities.add(p);
+    }
+    
+    
+    
     public double calculation(RequestDonation a)
     {
         if(receivedList.rdEntities.contains(a))

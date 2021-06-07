@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class Menu
 {
     int p;
-    public void checkuser(Organization org, RequestDonationList RDL, Donator o, Offers k)
+    public void checkuser(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o)
     { 
         System.out.println("===================================================\n\n");
         System.out.println("Δώστε το κινητό σας τηλέφωνο: ");
@@ -12,11 +12,11 @@ public class Menu
         if(org.donatorPhone(p) == p)
         {
             org.returnDonator(p);
-            Donator(org, RDL, o, k);
+            Donator(org, RDL, d, b, o);
         }
         else if(org.beneficiaryphone(p) == p)
         {
-            Beneficiary(org, RDL);
+            Beneficiary(org, RDL, d, b, o);
         }
         else if(org.getAdmin() == "true")
         {
@@ -37,7 +37,7 @@ public class Menu
                         String g = f.nextLine();
                         Beneficiary h = new Beneficiary(g, IntToString(p));
                         org.insertBeneficiary(h);
-                        Beneficiary(org, RDL);
+                        Beneficiary(org, RDL, d, b, o);
                         break;
                         //#posibol
                     case 2:
@@ -46,7 +46,7 @@ public class Menu
                         String j = i.nextLine();
                         Donator l = new Donator(j, IntToString(p));
                         org.insertDonator(l);
-                        Donator(org, RDL, o, k);
+                        Donator(org, RDL, d, b, o);
                         break;
                         //#posibol
                     }
@@ -58,7 +58,7 @@ public class Menu
             }
         }
     }
-    public void Beneficiary(Organization org, RequestDonationList RDL)
+    public void Beneficiary(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o) // ********************
     {
         System.out.println("===================================================");
         System.out.println("\t  Organization: Make it possible!\n\n");//onoma organismou
@@ -71,8 +71,29 @@ public class Menu
                 System.out.println(org.beneficiaryList.get(i).getname() + "\n" + org.beneficiaryList.get(i).getphone() + "\n\n");
             }
         }
+        System.out.println("===================================================\n\n");
+        System.out.println("1. Add Request\n\n2. Show Requests\n\n3. Commit\n\n4. Back\n\n5. Logout\n\n6. Exit\n\n");
+        System.out.println("\n\n===================================================");
+        System.out.print("Επιλέξτε μία ενέργεια από το μενού πατώντας τον αντίστοιχο αριθμο (1 - 6): ");
+        switch(ScannerInt())
+        {
+            case 1:
+                BC1(org, RDL, d, b, o);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+        }
+        
     }
-    public void Donator(Organization org, RequestDonationList RDL, Donator o, Offers k)
+    public void Donator(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o)
     {
         System.out.println("===================================================");
         System.out.println("\t  Organization: Make it possible!\n\n");//onoma organismou
@@ -92,32 +113,32 @@ public class Menu
         switch(ScannerInt())
         {
             case 1:
-                DC1(org, RDL, o, k);
+                DC1(org, RDL, d, b, o);
                 break;
             case 2:
-                DC2(org, RDL, o, k);
+                DC2(org, RDL, d, b, o);
                 break;
             case 3:
-                DC3(org, RDL, o, k);
+                DC3(org, RDL, d, b, o);
                 break;
             case 4:
-                DC4(org, RDL, o, k, 1);
+                DC4(org, RDL, d, b, o, 1);
                 break;
             case 5:
-                DC5(org, RDL, o, k);
+                DC5(org, RDL, d, b, o);
                 break;
             case 6:
                 DC6();
                 break;
         }
     }
-    public void DC1(Organization org, RequestDonationList RDL, Donator o, Offers k)
+    public void DC1(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o)
     {
         org.listEntities();
         System.out.println("3. Back");
             switch(ScannerInt())
             {
-                case 1:
+                case 1: 
                     System.out.println("===================================================\n\n");
                     System.out.println("Material(s)\n\n");
                     RDL.listMaterials();
@@ -126,57 +147,18 @@ public class Menu
                     switch(ScannerInt())
                     {
                         case 1:
-                            System.out.println(RDL.rdEntities.get(0).getEntity().getEntityInfo());
-                            System.out.println("Θέλετε να προσφέρετε αυτό το αγαθό; (y/n)");
-                            switch(ScannerChar())
-                            {
-                                case 'y':
-                                    System.out.println("Πόση ποσότητα θέλετε να προσφέρετε;");
-                                    o.add(RDL.rdEntities.get(0), ScannerDouble(), o);
-                                    System.out.println("Η προσφορά σας προστέθηκε στην λίστα σας, μπορείτε να την δείτε και να την επεξεργαστείτε πατώντας το 2 και να την επικυρώσετε πατώντας το 3!!!");
-                                    Donator(org, RDL, o, k);
-                                    break;
-                                case 'n':
-                                    Donator(org, RDL, o, k);
-                                    break;
-                            }
+                            casesForDonator(org, RDL, d, b, o, 0);
                             break;
                             
                         case 2:
-                            System.out.println(RDL.rdEntities.get(1).getEntity().getEntityInfo());
-                            System.out.println("Θέλετε να προσφέρετε αυτό το αγαθό; (y/n)");
-                             switch(ScannerChar())
-                            {
-                                case 'y':
-                                    System.out.println("Πόση ποσότητα θέλετε να προσφέρετε;");
-                                    o.add(RDL.rdEntities.get(1), ScannerDouble(), o);
-                                    System.out.println("Η προσφορά σας προστέθηκε στην λίστα σας, μπορείτε να την δείτε και να την επεξεργαστείτε πατώντας το 2 και να την επικυρώσετε πατώντας το 3!!!");
-                                    Donator(org, RDL, o, k);
-                                    break;
-                                case 'n':
-                                    Donator(org, RDL, o, k);
-                                    break;
-                            }
+                            casesForDonator(org, RDL, d, b, o, 1);
                             break;
                             
                         case 3:
-                            System.out.println(RDL.rdEntities.get(2).getEntity().getEntityInfo());
-                            System.out.println("Θέλετε να προσφέρετε αυτό το αγαθό; (y/n)");
-                             switch(ScannerChar())
-                            {
-                                case 'y':
-                                    System.out.println("Πόση ποσότητα θέλετε να προσφέρετε;");
-                                    o.add(RDL.rdEntities.get(2), ScannerDouble(), o);
-                                    System.out.println("Η προσφορά σας προστέθηκε στην λίστα σας, μπορείτε να την δείτε και να την επεξεργαστείτε πατώντας το 2 και να την επικυρώσετε πατώντας το 3!!!");
-                                    Donator(org, RDL, o, k);
-                                    break;
-                                case 'n':
-                                    Donator(org, RDL, o, k);
-                                    break;
-                            }
+                            casesForDonator(org, RDL, d, b, o, 2);
                             break;
                         case 4:
-                            DC4(org, RDL, o, k, 2);
+                            DC4(org, RDL, d, b, o, 2);
                             break;
                         }
                     break;
@@ -190,70 +172,31 @@ public class Menu
                     switch(ScannerInt())
                     {
                         case 1:
-                            System.out.println(RDL.rdEntities.get(3).getEntity().getEntityInfo());
-                            System.out.println("Θέλετε να προσφέρετε αυτό το αγαθό; (y/n)");
-                            switch(ScannerChar())
-                            {
-                                case 'y':
-                                    System.out.println("Πόση ποσότητα θέλετε να προσφέρετε;");
-                                    o.add(RDL.rdEntities.get(3), ScannerDouble(), o);
-                                    System.out.println("Η προσφορά σας προστέθηκε στην λίστα σας, μπορείτε να την δείτε και να την επεξεργαστείτε πατώντας το 2 και να την επικυρώσετε πατώντας το 3!!!");
-                                    Donator(org, RDL, o, k);
-                                    break;
-                                case 'n':
-                                    Donator(org, RDL, o, k);
-                                    break;
-                            }
+                            casesForDonator(org, RDL, d, b, o, 3);
                             break;
                             
                         case 2:
-                            System.out.println(RDL.rdEntities.get(4).getEntity().getEntityInfo());
-                            System.out.println("Θέλετε να προσφέρετε αυτό το αγαθό; (y/n)");
-                             switch(ScannerChar())
-                            {
-                                case 'y':
-                                    System.out.println("Πόση ποσότητα θέλετε να προσφέρετε;");
-                                    o.add(RDL.rdEntities.get(4), ScannerDouble(), o);
-                                    System.out.println("Η προσφορά σας προστέθηκε στην λίστα σας, μπορείτε να την δείτε και να την επεξεργαστείτε πατώντας το 2 και να την επικυρώσετε πατώντας το 3!!!!");
-                                    Donator(org, RDL, o, k);
-                                    break;
-                                case 'n':
-                                    Donator(org, RDL, o, k);
-                                    break;
-                            }
+                            casesForDonator(org, RDL, d, b, o, 4);
                             break;
                             
                         case 3:
-                            System.out.println(RDL.rdEntities.get(5).getEntity().getEntityInfo());
-                            System.out.println("Θέλετε να προσφέρετε αυτό το αγαθό; (y/n)");
-                             switch(ScannerChar())
-                            {
-                                case 'y':
-                                    System.out.println("Πόση ποσότητα θέλετε να προσφέρετε;");
-                                    o.add(RDL.rdEntities.get(5), ScannerDouble(), o);
-                                    System.out.println("Η προσφορά σας προστέθηκε στην λίστα σας, μπορείτε να την δείτε και να την επεξεργαστείτε πατώντας το 2 και να την επικυρώσετε πατώντας το 3!!!");
-                                    Donator(org, RDL, o, k);
-                                    break;
-                                case 'n':
-                                    Donator(org, RDL, o, k);
-                                    break;
-                            }
+                            casesForDonator(org, RDL, d, b, o, 5);
                             break;
                             
                         case 4:
-                            DC4(org, RDL, o, k, 2);
+                            DC4(org, RDL, d, b, o, 2);
                             break;
                         }
                     break;
                     
                 case 3:
-                    DC4(org, RDL, o, k, 1);
+                    DC4(org, RDL, d, b, o, 1);
                     break;
             }
     }
-    public void DC2(Organization org, RequestDonationList RDL, Donator o, Offers k)
+    public void DC2(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o)
     {
-        if(o.getoffersList().rdEntities.size() != 0)
+        if(d.getoffersList().rdEntities.size() != 0)
             {
                 System.out.println("Η λίστα με τα αντικείμενα που θέλετε να προσφέρετε είναι η εξής: ");
                 o.monitor();
@@ -261,7 +204,7 @@ public class Menu
             else
             {
                 System.out.println("Δεν έχετε κάποιες προσφορές αυτή την στιγμή!");
-                Donator(org, RDL, o, k);
+                Donator(org, RDL, d, b, o);
             }
         int p = ScannerInt();
         switch((1 <= p && p <= 100) ? 1 : (101 <= p && p <= 10000) ? 2 : 3)
@@ -275,60 +218,154 @@ public class Menu
                 switch(ScannerInt())
                 {
                     case 1:
-                        o.remove(o.getoffersList().rdEntities.get(p-1));
-                        Donator(org, RDL, o, k);
+                        d.remove(d.getoffersList().rdEntities.get(p-1));
+                        Donator(org, RDL, d, b, o);
                         break;
                     case 2:
                         System.out.println("\nΟρίστε την ποσότητα που θέλετε να προσθέσετε ή να αφαιρέσετε κάνωντας χρήση του μείον (-)!");
                         double a = ScannerDouble();
                         System.out.println(a);
-                        o.modify(o.getoffersList().rdEntities.get(p-1), a);
-                        Donator(org, RDL, o, k);
+                        o.modify(d.getoffersList().rdEntities.get(p-1), a);
+                        Donator(org, RDL, d, b, o);
                         break;
                     case 3:
-                        o.reset();
-                        Donator(org, RDL, o, k);
+                        d.reset();
+                        Donator(org, RDL, d, b, o);
                         break;
                     case 4:
-                        DC3(org, RDL, o, k);
+                        DC3(org, RDL, d, b, o);
                         break;
                     case 5:
-                        DC4(org, RDL, o, k, 3);
+                        DC4(org, RDL, d, b, o, 3);
                         break;
                 }
                 break;
         }
     }
-    public void DC3(Organization org, RequestDonationList RDL, Donator o, Offers k)
+    public void DC3(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o)
     {
-        k.commit(RDL, org, o);
+        o.commit(RDL, org, d);
         System.out.println("Η δωρεά σας κατοχυρώθηκε στον οργανισμό μας. Σας ευχαριστούμε θερμά!");
-        Donator(org, RDL, o, k);
+        Donator(org, RDL, d, b, o);
         RDL.monitor();
     }
-    public void DC4(Organization org, RequestDonationList RDL, Donator o, Offers k, int a)
+    public void DC4(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o, int a)
     {
         switch(a)
         {
             case 1:
-                checkuser(org, RDL, o, k);
+                checkuser(org, RDL, d, b, o);
                 break;
             case 2:
-                DC1(org, RDL, o, k);
+                DC1(org, RDL, d, b, o);
                 break;
             case 3:
-                DC2(org, RDL, o, k);
+                DC2(org, RDL, d, b, o);
                 break;
         }
     }
-    public void DC5(Organization org, RequestDonationList RDL, Donator o, Offers k)
+    public void DC5(Organization org, RequestDonationList RDL,  Donator d, Beneficiary b, Offers o)
     {
-        checkuser(org, RDL, o, k);
+        checkuser(org, RDL, d, b, o);
     }
     public void DC6()
     {
         System.exit(0);
     }
+    
+    
+    
+    
+    public void BC1(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o)  // ADD REQUEST
+    {
+        org.listCurrentDonations();
+        System.out.println("3. Back");
+        switch(ScannerInt())
+        {
+            case 1: // ΕΔΩ ΕΧΕΙ ΕΠΙΛΕΓΕΙ Η ΚΑΤΗΓΟΡΙΑ MATERIALS
+                System.out.println("===================================================\n\n");
+                System.out.println("Material(s)\n\n");
+                RDL.listMaterials();
+                System.out.println("4. Back");
+                System.out.println("\n\n==================================================="); 
+                switch(ScannerInt())
+                {
+                    case 1: // ΕΠΙΛΟΓΗ ΠΡΩΤΟΥ MATERIAL
+                        casesForBeneficiary(org, RDL, d, b, o, 0);
+                        break;
+                    case 2: // ΕΠΙΛΟΓΗ ΔΕΥΤΕΡΟΥ MATERIAL
+                        casesForBeneficiary(org, RDL, d, b, o, 1);
+                        break;
+                    case 3: // ΕΠΙΛΟΓΗ ΤΡΙΤΟΥ MATERIAL
+                        casesForBeneficiary(org, RDL, d, b, o, 2);
+                        break;
+                    case 4: // ΕΔΩ ΚΑΝΕΙ BACK.
+                        break;
+                }
+            case 2: // ΕΔΩ ΕΧΕΙ ΕΠΙΛΕΓΕΙ Η ΚΑΤΗΓΟΡΙΑ SERVICES
+                    System.out.println("===================================================\n\n");
+                    System.out.println("Service(s)\n\n");
+                    RDL.listServices();
+                    System.out.println("4. Back");
+                    System.out.println("\n\n===================================================");
+                    switch(ScannerInt())
+                    {
+                        case 1:
+                            casesForBeneficiary(org, RDL, d, b, o, 3);
+                            break;
+                        case 2:
+                            casesForBeneficiary(org, RDL, d, b, o, 4);
+                            break;
+                        case 3:
+                            casesForBeneficiary(org, RDL, d, b, o, 5);
+                            break;
+                        case 4: // ΕΔΩ ΚΑΝΕΙ BACK.
+                            break;
+                    }
+        }
+    }
+    
+    
+    
+    public void casesForBeneficiary(Organization org,RequestDonationList RDL , Donator d, Beneficiary b, Offers o, int i)
+    {
+        System.out.println(RDL.rdEntities.get(i).getEntity().getEntityInfo());
+        System.out.println("Θέλετε να πάρετε αυτό το αγαθό; (y/n)");
+        switch(ScannerChar())
+        {
+            case 'y':
+                System.out.println("Πόση ποσότητα θέλετε να πάρετε;");
+                b.add(b.getRequestsList().rdEntities.get(i), ScannerDouble());
+                System.out.println("Η αίτησή σας προστέθηκε στην λίστα αιτήσεών σας. Μπορείτε να την δείτε και να την επεξεργαστείτε πατώντας το 2 και να την επικυρώσετε πατώντας το 3.");
+                Beneficiary(org, RDL, d, b, o);
+                break;
+            case 'n':
+                Beneficiary(org, RDL, d, b, o);
+                break;
+        }
+    }
+    
+    
+    public void casesForDonator(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o, int i)
+    {
+        System.out.println(RDL.rdEntities.get(i).getEntity().getEntityInfo());
+        System.out.println("Θέλετε να προσφέρετε αυτό το αγαθό; (y/n)");
+        switch(ScannerChar())
+        {
+            case 'y':
+                System.out.println("Πόση ποσότητα θέλετε να προσφέρετε;");
+                d.add(RDL.rdEntities.get(i), ScannerDouble());
+                System.out.println("Η προσφορά σας προστέθηκε στην λίστα σας, μπορείτε να την δείτε και να την επεξεργαστείτε πατώντας το 2 και να την επικυρώσετε πατώντας το 3!!!");
+                Donator(org, RDL, d, b, o);
+                break;
+            case 'n':
+                Donator(org, RDL, d, b, o);
+                break;
+        }
+    }
+    
+    
+    
     public int ScannerInt()
     {
         Scanner a = new Scanner(System.in);

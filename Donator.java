@@ -11,7 +11,7 @@ public class Donator extends User
     }
     
     //Methods
-    public void add(RequestDonation a, double quantity, Donator o)
+    public void add(RequestDonation a, double quantity)
     {
         RequestDonation p = new RequestDonation(a.getEntity(), quantity);
         offersList.rdEntities.add(p);

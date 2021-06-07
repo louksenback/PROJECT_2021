@@ -47,7 +47,7 @@ public class Organization
     }
     public void listEntities()
     {
-        System.out.println("Oi kathgories twn entity einai: 1) Material, 2) Service");
+        System.out.println("Οι κατηγορίες των entities είναι: 1) Material, 2) Service");
         System.out.println("\n1. Material(s):");
         for(int k = 0; k<entityList.size(); k++)
         {
@@ -65,6 +65,30 @@ public class Organization
             }
         }
     }
+    
+    
+    public void listCurrentDonations()
+    {
+        System.out.println("Οι κατηγορίες των ειδών προς δωρεά είναι: 1) Material, 2) Service");
+        System.out.println("\n1. Material(s):");
+        for(int i = 0; i<currentDonations.rdEntities.size(); i++)
+        {
+            if(returnClass(i) == "Material")
+            {
+                System.out.println(currentDonations.rdEntities.get(i).getEntity().getName());
+            }
+        }
+        System.out.println("\n2. Sevice(s):");
+        for(int i = 0; i<currentDonations.rdEntities.size(); i++)
+        {
+            if(returnClass(i) == "Service")
+            {
+                System.out.println(currentDonations.rdEntities.get(i).getEntity().getName());
+            }
+        }
+    }
+    
+    
     public void listBeneficiaries()
     {
         for(int l = 0; l<beneficiaryList.size(); l++)
