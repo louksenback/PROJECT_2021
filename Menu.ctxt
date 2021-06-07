@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Menu
+comment1.params=org\ RDL\ o\ k
+comment1.target=void\ checkuser(Organization,\ RequestDonationList,\ Donator,\ Offers)
+comment10.params=p
+comment10.target=java.lang.String\ IntToString(int)
+comment11.params=p
+comment11.target=int\ StringToInt(java.lang.String)
+comment2.params=org\ RDL
+comment2.target=void\ Beneficiary(Organization,\ RequestDonationList)
+comment3.params=org\ RDL\ o\ k
+comment3.target=void\ Donator(Organization,\ RequestDonationList,\ Donator,\ Offers)
+comment4.params=org\ RDL\ o\ k
+comment4.target=void\ DC1(Organization,\ RequestDonationList,\ Donator,\ Offers)
+comment5.params=org\ RDL\ o\ k
+comment5.target=void\ DC2(Organization,\ RequestDonationList,\ Donator,\ Offers)
+comment6.params=org\ RDL\ o\ k
+comment6.target=void\ DC3(Organization,\ RequestDonationList,\ Donator,\ Offers)
+comment7.params=
+comment7.target=int\ ScannerInt()
+comment8.params=
+comment8.target=char\ ScannerChar()
+comment9.params=
+comment9.target=double\ ScannerDouble()
+numComments=12

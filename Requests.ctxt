@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Requests
+comment1.params=a\ b
+comment1.target=void\ check(RequestDonation,\ Beneficiary)
+comment2.params=a\ quantity\ b
+comment2.target=void\ add(RequestDonation,\ double,\ Beneficiary)
+comment3.params=a\ quantity\ b
+comment3.target=void\ modify(RequestDonation,\ double,\ Beneficiary)
+comment4.params=b\ c
+comment4.target=int\ validRequestDonation(RequestDonation,\ Beneficiary)
+comment5.params=a\ b\ quantity
+comment5.target=void\ commit(RequestDonation,\ Beneficiary,\ java.lang.Double)
+numComments=6

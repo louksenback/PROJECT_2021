@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Beneficiary
+comment1.params=name\ phone
+comment1.target=Beneficiary(java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=void\ setnoPersons()
+comment3.params=
+comment3.target=int\ getNoPersons()
+comment4.params=
+comment4.target=RequestDonationList\ getReceivedList()
+comment5.params=a
+comment5.target=double\ calculation(RequestDonation)
+numComments=6
