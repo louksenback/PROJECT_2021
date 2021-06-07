@@ -11,7 +11,7 @@ public class Organization
     //Methods
     public void setAdmin(String name, Admin admin)
     {
-        this.name = name;
+        this. name = name;
         this.admin = admin;
     }
     public String getAdmin()
@@ -23,7 +23,7 @@ public class Organization
         entityList.add(e);
         //exception 
     }
-    public void removeEntity(Entity f)
+    void removeEntity(Entity f)
     {
         entityList.remove(f);
     }
@@ -51,7 +51,7 @@ public class Organization
         System.out.println("\n1. Material(s):");
         for(int k = 0; k<entityList.size(); k++)
         {
-            if(returnKlash(k) == "Material")
+            if(returnClass(k) == "Material")
             {
                 System.out.println(entityList.get(k).getName());
             }
@@ -59,7 +59,7 @@ public class Organization
         System.out.println("\n2. Sevice(s):");
         for(int l = 0; l<entityList.size(); l++)
         {
-            if(returnKlash(l) == "Service")
+            if(returnClass(l) == "Service")
             {
                 System.out.println(entityList.get(l).getName());
             }
@@ -69,7 +69,7 @@ public class Organization
     {
         for(int l = 0; l<beneficiaryList.size(); l++)
         {
-            System.out.println(beneficiaryList.get(l) );
+            System.out.println(beneficiaryList.get(l));
         }
     }
     public void listDonators()
@@ -115,7 +115,7 @@ public class Organization
         }
         return donatorList.get(0); //exception
     }
-    public String returnKlash(int i)
+    public String returnClass(int i)
     {
         Entity a = entityList.get(i);
         Class class1 = a.getClass();

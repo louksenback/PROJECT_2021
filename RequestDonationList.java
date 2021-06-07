@@ -26,12 +26,15 @@ class RequestDonationList
         }
     }
     public void add(RequestDonation b, double quantity)
-    {   
-        if(rdEntities.contains(b))
+    {
+        for(int i = 0; i < rdEntities.size(); i++)
         {
-            modify(b, quantity);
+            if(rdEntities.get(i).getEntity().getId() == b.getEntity().getId())
+            {
+                modify(rdEntities.get(i), quantity);
+            }
         }
-        else
+        if(rdEntities.contains(b.getEntity()))
         {
             rdEntities.add(b);
         }
@@ -59,7 +62,7 @@ class RequestDonationList
     {
         for(int k = 0; k<rdEntities.size(); k++)
         {
-            if(returnKlash(k) == "Material")
+            if(returnClass(k) == "Material")
             {
                 System.out.println((k+1) + ") " + rdEntities.get(k).getEntity().getName() + " " + "(" + rdEntities.get(k).getquantity() + ")");
             }
@@ -67,20 +70,20 @@ class RequestDonationList
     }
     public void listServices()
     {
-        for(int k = 0; k<rdEntities.size(); k++)
+        for(int l = 0; l<rdEntities.size(); l++)
         {
-            if(returnKlash(k) == "Service")
+            if(returnClass(l) == "Service")
             {
-                System.out.println((k-2) + ") " + rdEntities.get(k).getEntity().getName() + " " + "(" + rdEntities.get(k).getquantity() + ")");
+                System.out.println((l-2) + ") " + rdEntities.get(l).getEntity().getName() + " " + "(" + rdEntities.get(l).getquantity() + ")");
             }
         }
     }
-    public void reset()
+    public void reset(RequestDonationList RDL)
     {
-        rdEntities.clear(); //ΕΕΕΕΕΕΕΕΕΕΕΕΕΕΕ?????????????????????? ΔΕΝ ΠΡΕΠΕΙ ΝΑ ΛΕΙΠΕΙ ΤΟ ΟΡΙΣΜΑ ΚΑΝΟΝΙΚΑ?
-        System.out.println("Ola ta stoixeia ths listas diagrafhkan - afairethikan");
+        rdEntities.clear();
+        System.out.println("Όλα τα στοιχεία της λίστας αφαιρέθηκαν!");
     }
-    public String returnKlash(int i)
+    public String returnClass(int i)
     {
         Entity a = rdEntities.get(i).getEntity();
         Class class1 = a.getClass();

@@ -21,12 +21,12 @@ public class main
         RequestDonation medicalSupport = new RequestDonation(MedicalSupport, 5);
         RequestDonation nurserySupport = new RequestDonation(NurserySupport, 10);
         RequestDonation babySitting = new RequestDonation(BabySitting, 15);
-        RDL.add(milk, 0);
-        RDL.add(sugar, 0);
-        RDL.add(rice, 0);
-        RDL.add(medicalSupport, 0);
-        RDL.add(nurserySupport, 0);
-        RDL.add(babySitting, 0);
+        RDL.rdEntities.add(milk);
+        RDL.rdEntities.add(sugar);
+        RDL.rdEntities.add(rice);
+        RDL.rdEntities.add(medicalSupport);
+        RDL.rdEntities.add(nurserySupport);
+        RDL.rdEntities.add(babySitting);
         
         org.addEntity(Milk);
         org.addEntity(Sugar);

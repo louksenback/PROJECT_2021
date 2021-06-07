@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 class Requests extends RequestDonationList
 {
-    private double input = 0.0;
+    private double input = 0;
     
     //Methods
     public void check(RequestDonation a, Beneficiary b)
@@ -48,7 +48,7 @@ class Requests extends RequestDonationList
     }
     public void add(RequestDonation a, double quantity, Beneficiary b)
     {
-        b.getReceivedList().add(a, quantity);
+        //b.getReceivedList().add(a, quantity);
     }
     public void modify(RequestDonation a, double quantity, Beneficiary b)
     {

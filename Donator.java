@@ -11,15 +11,15 @@ public class Donator extends User
     }
     
     //Methods
-    public void add(RequestDonation a, double quantity)
+    public void add(RequestDonation a, double quantity, Donator o)
     {
-        offersList.rdEntities.add(a);
-        a.setquantity(a, quantity);
+        RequestDonation p = new RequestDonation(a.getEntity(), quantity);
+        offersList.rdEntities.add(p);
     }
     public void remove(RequestDonation w)
     {
         offersList.rdEntities.remove(w);
-    } 
+    }
     public void commit(Offers o)
     {
         o.rdEntities = offersList.rdEntities;

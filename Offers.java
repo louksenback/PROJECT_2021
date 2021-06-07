@@ -1,17 +1,14 @@
 public class Offers extends RequestDonationList
 {
     //Methods
-    public void commit(RequestDonationList RDL, Organization org)
+    public void commit(RequestDonationList RDL, Organization org, Donator o)
     {
-        for(int i = 0; i<1; i++)
+        for(int i = 0; i < o.getoffersList().rdEntities.size(); i++)
         {
-            org.currentDonations = RDL;
+            org.currentDonations = o.getoffersList();
+            RDL.add(o.getoffersList().rdEntities.get(i), o.getoffersList().rdEntities.get(i).getquantity());
         }
-        reset();
+        o.getoffersList().rdEntities.clear();
+        RDL.monitor();
     }
-    /*public void commitOne(RequestDonationList RDL, Organization org, int p)
-    {
-        RDL.rdEntities.add(rdEntities.get(p-1), rdEntities.get(p-1).getquantity());
-        
-    }*/
 }
