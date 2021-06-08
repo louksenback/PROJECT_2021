@@ -6,14 +6,17 @@ public class main
         Organization org = new Organization();
         RequestDonationList RDL = new RequestDonationList();
         Offers o = new Offers();
+        Requests r = new Requests();
+        Admin a = new Admin("Programmers", "0000000000");
+        org.setAdmin("Programmers", a);
         
-        Material Milk = new Material("Μilk", "ufyfguw", 1826);
-        Material Sugar = new Material("Sugar", "hgagagra", 1827);
-        Material Rice = new Material("Rice", "eqtffWF", 1828);
+        Material Milk = new Material("Γάλα", "Αγελαδίσιο Γάλα", 1826);
+        Material Sugar = new Material("Ζάχαρη", "Λευκή κρυσταλική ζάχαρη", 1827);
+        Material Rice = new Material("Ρύζι", "Ρύζι νυχάκι", 1828);
         
-        Service MedicalSupport = new Service("MedicalSupport", "vfgwgfy", 1628);
-        Service NurserySupport = new Service("NurserySupport", "gaegae", 1629);
-        Service BabySitting = new Service("BabySitting", "gwdfwyu", 1630);
+        Service MedicalSupport = new Service("MedicalSupport", "Δωρεάν αγορά φαρμάκων", 1628);
+        Service NurserySupport = new Service("NurserySupport", "Επίσκεψη σε νοσοκομείο και δωρεάν περίθαλψη με παροχή κλίνης", 1629);
+        Service BabySitting = new Service("BabySitting", "Φύλαξη του παιδιού(ων) για μία ημέρα", 1630);
         
         RequestDonation milk = new RequestDonation(Milk, 5);
         RequestDonation sugar = new RequestDonation(Sugar, 10);
@@ -27,21 +30,42 @@ public class main
         RDL.rdEntities.add(medicalSupport);
         RDL.rdEntities.add(nurserySupport);
         RDL.rdEntities.add(babySitting);
+        try
+        {
+            org.addEntity(Milk);
+            org.addEntity(Sugar);
+            org.addEntity(Rice);
+            org.addEntity(MedicalSupport);
+            org.addEntity(NurserySupport);
+            org.addEntity(BabySitting);
+        }
+        catch(ExceptionOrganization O)
+        {
+            System.err.println(O);
+        }
         
-        org.addEntity(Milk);
-        org.addEntity(Sugar);
-        org.addEntity(Rice);
-        org.addEntity(MedicalSupport);
-        org.addEntity(NurserySupport);
-        org.addEntity(BabySitting);
+        Donator m = new Donator("Άλέξης", "1111111111");
+        Beneficiary k = new Beneficiary("Σάκης", "2222222222");
+        try
+        {
+            org.insertDonator(m);
+        }
+        catch(ExceptionOrganization p)
+        {
+            System.err.println(p);
+        }
+        try
+        {
+            org.insertBeneficiary(k);
+        }
         
-        Donator m = new Donator("Nikos", "1");
-        Beneficiary k = new Beneficiary("Giorgos", "11");
-        org.insertDonator(m);
-        org.insertBeneficiary(k);
+        catch (ExceptionOrganization l)
+        {
+            System.err.println(l);
+        }
         
         Menu b = new Menu();
-        b.checkuser(org, RDL, m, k, o);
+        b.checkuser(org, RDL, m, k, o, r);
         
         /*Material Milk = new Material("Μilk", "ufyfguw", 1826);
         Service MedicalSupport = new Service("MedicalSupport", "vfgwgfy", 1628);

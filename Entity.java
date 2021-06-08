@@ -22,7 +22,7 @@ public abstract class Entity
     {
         return getEntityInfo() + getDetails();
     }
-    public abstract double getlevel(Beneficiary b);
+    public abstract double getlevel(Beneficiary b) throws ExceptionLevel;
     public int getId()
     {
         return this.id;

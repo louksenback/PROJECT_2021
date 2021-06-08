@@ -2,94 +2,128 @@ import java.util.Scanner;
 
 class Requests extends RequestDonationList
 {
-    private double input = 0;
     
     //Methods
-    public void check(RequestDonation a, Beneficiary b)
+    public void check(RequestDonationList RDL, RequestDonation a, Beneficiary b, double quantity, int i) throws ExceptionRequests
     {
         b.setnoPersons();
-        System.out.println("Eisagetai mia posothta: ");
-        Scanner s = new Scanner(System.in);
-        input = s.nextInt();
         
         Class class1 = a.getEntity().getClass();
         String klash = class1.getName();
         if(klash == "Material")
         {
-            if(a.getquantity() >= input && (validRequestDonation(a, b) == 1))
+            if(a.getquantity() >= b.getRequestsList().rdEntities.get(i).getquantity() && (validRequestDonation(a, b, i) == 1))
             {
-                 modify(a, input, b);
-                 a.removequantity(input);
+                add(RDL, a, quantity, b);
             }
             else
             {
-                if((a.getquantity() <= input) == false )
+                if((a.getquantity() <= b.getRequestsList().rdEntities.get(i).getquantity()) == false )
                 {
-                    //exception
+                    throw new ExceptionRequests("Η πσοότητα που ζητάτε δεν είναι διαθέσιμη στον οργανισμό μας!");
                 }
                 else
                 {
-                    //exception
+                    throw new ExceptionRequests("Η ποσότητα που ζητάτε δεν αντιστοιχεί στην ποσότητα που επιτρέπει το level σας να πάρετε!");
                 }
             }
         }
         if(klash == "Service")
         {
-            if(a.getquantity() >= input)
+            if(a.getquantity() >= b.getRequestsList().rdEntities.get(i).getquantity())
             {
-                modify(a, input, b);
-                a.removequantity(input);
+                add(RDL, a, quantity, b);
             }
             else
             {
-                //exception
+                throw new ExceptionRequests("Η πσοότητα που ζητάτε δεν είναι διαθέσιμη στον οργανισμό μας!");
             }
         }
     }
-    public void add(RequestDonation a, double quantity, Beneficiary b)
+    public void add(RequestDonationList RDL, RequestDonation a, double quantity, Beneficiary b)
     {
-        //b.getReceivedList().add(a, quantity);
-    }
-    public void modify(RequestDonation a, double quantity, Beneficiary b)
-    {
-        if(b.getReceivedList().rdEntities.contains(a))
+        int check = 0;
+        if(b.getReceivedList().rdEntities.size() > 0)
         {
-            modify(a, quantity);
+            for(int i = 0; i <= b.getReceivedList().rdEntities.size(); i++)
+            {
+                if(b.getReceivedList().rdEntities.get(i).getEntity().getId() == RDL.rdEntities.get(i).getEntity().getId())
+                {
+                    modify(b.getReceivedList().rdEntities.get(i), quantity, b, i);
+                }
+                else
+                {
+                    check++;
+                }
+            }
+            if(check == b.getReceivedList().rdEntities.size())
+            {
+                b.getReceivedList().rdEntities.add(a);
+            }
         }
         else
         {
-            add(a, quantity, b);
+            b.getReceivedList().rdEntities.add(a);
         }
     }
-    public int validRequestDonation(RequestDonation b, Beneficiary c) //exceptions gia tis if mesa stis if mesa stis if
+    public void modify(RequestDonation a, double quantity, Beneficiary b, int i)
+    {
+        b.getReceivedList().rdEntities.get(i).addquantity(quantity);
+    }
+    public int validRequestDonation(RequestDonation b, Beneficiary c, int i)
     {
         Class class1 = b.getClass();
         String klash = class1.getName();
-        if(c.getNoPersons() == 1)
+        try
         {
-            if(c.calculation(b) + input <= b.getEntity().getlevel(c))
+            if(c.getNoPersons() == 1)
             {
-                return 1;
+                if(c.calculation(b) + c.getRequestsList().rdEntities.get(i).getquantity() <= b.getEntity().getlevel(c))
+                {
+                    return 1;
+                }
+            }
+            else if(c.getNoPersons() >= 2 && c.getNoPersons()<= 4)
+            {
+                if(c.calculation(b) + c.getRequestsList().rdEntities.get(i).getquantity() <= b.getEntity().getlevel(c))
+                {
+                    return 1;
+                }
+            }
+            else if(c.getNoPersons() >= 5)
+            {
+                if(c.calculation(b) + c.getRequestsList().rdEntities.get(i).getquantity() <= b.getEntity().getlevel(c))
+                {
+                    return 1;
+                }
             }
         }
-        else if(c.getNoPersons() >= 2 && c.getNoPersons()<= 4)
+        catch(ExceptionLevel a)
         {
-            if(c.calculation(b) + input <= b.getEntity().getlevel(c))
-            {
-                return 1;
-            }
+            System.err.println(a);
         }
-        else if(c.getNoPersons() >= 5)
-        {
-            if(c.calculation(b) + input <= b.getEntity().getlevel(c))
-            {
-                return 1;
-            }
-        }
-        return -1; //exception
+        return -1;
     }
-    public void commit(RequestDonation a, Beneficiary b, Double quantity)
+    public void commit(RequestDonationList RDL, RequestDonation a, Beneficiary b, double quantity, int i)
     {
-        check(a, b); //Estw oti epityxoun oi elegxoi
+        try
+        {
+            check(RDL, a, b, quantity, i);
+            System.out.println(RDL.rdEntities.size());
+            for(int j = 0; j < RDL.rdEntities.size(); j++)
+            {
+                System.out.println("fffffffffff");
+                if(b.getReceivedList().rdEntities.get(i).getEntity().getId() == RDL.rdEntities.get(j).getEntity().getId())
+                {
+                    System.out.println("iiiiiiiiii");
+                    RDL.rdEntities.get(j).addquantity(-quantity);
+                }
+            }
+            b.reset();
+        }
+        catch (ExceptionRequests er)
+        {
+            System.err.println(er);
+        }
     }
 }

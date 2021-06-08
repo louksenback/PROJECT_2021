@@ -25,18 +25,34 @@ class RequestDonationList
             }
         }
     }
-    public void add(RequestDonation b, double quantity)
+    public void add(Organization org,RequestDonation b, double quantity)
     {
+        int check = 0;
         for(int i = 0; i < rdEntities.size(); i++)
         {
             if(rdEntities.get(i).getEntity().getId() == b.getEntity().getId())
             {
                 modify(rdEntities.get(i), quantity);
             }
+            else
+            {
+                check++;
+            }
         }
-        if(rdEntities.contains(b.getEntity()))
+        if(check == rdEntities.size())
         {
             rdEntities.add(b);
+        }
+        try
+        {
+            if(org.entityList.contains(b.getEntity()))
+            {
+                throw new ExceptionOrganization("Το είδος που εισήγατε υπάρχει ήδη στη λίστα!");
+            }
+        }
+        catch(ExceptionOrganization eo)
+        {
+            System.err.print(eo);
         }
     }
     public void remove(RequestDonation c)

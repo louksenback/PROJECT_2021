@@ -6,7 +6,7 @@ public class Offers extends RequestDonationList
         for(int i = 0; i < o.getoffersList().rdEntities.size(); i++)
         {
             org.currentDonations = o.getoffersList();
-            RDL.add(o.getoffersList().rdEntities.get(i), o.getoffersList().rdEntities.get(i).getquantity());
+            RDL.add(org, o.getoffersList().rdEntities.get(i), o.getoffersList().rdEntities.get(i).getquantity());
         }
         o.getoffersList().rdEntities.clear();
         RDL.monitor();

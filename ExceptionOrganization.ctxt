@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=ExceptionOrganization
+comment1.params=message
+comment1.target=ExceptionOrganization(java.lang.String)
+numComments=2

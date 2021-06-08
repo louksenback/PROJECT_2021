@@ -1,13 +1,13 @@
 #BlueJ class context
 comment0.target=Requests
-comment1.params=a\ b
-comment1.target=void\ check(RequestDonation,\ Beneficiary)
-comment2.params=a\ quantity\ b
-comment2.target=void\ add(RequestDonation,\ double,\ Beneficiary)
-comment3.params=a\ quantity\ b
-comment3.target=void\ modify(RequestDonation,\ double,\ Beneficiary)
-comment4.params=b\ c
-comment4.target=int\ validRequestDonation(RequestDonation,\ Beneficiary)
-comment5.params=a\ b\ quantity
-comment5.target=void\ commit(RequestDonation,\ Beneficiary,\ java.lang.Double)
+comment1.params=RDL\ a\ b\ quantity\ i
+comment1.target=void\ check(RequestDonationList,\ RequestDonation,\ Beneficiary,\ double,\ int)
+comment2.params=RDL\ a\ quantity\ b
+comment2.target=void\ add(RequestDonationList,\ RequestDonation,\ double,\ Beneficiary)
+comment3.params=a\ quantity\ b\ i
+comment3.target=void\ modify(RequestDonation,\ double,\ Beneficiary,\ int)
+comment4.params=b\ c\ i
+comment4.target=int\ validRequestDonation(RequestDonation,\ Beneficiary,\ int)
+comment5.params=RDL\ a\ b\ quantity\ i
+comment5.target=void\ commit(RequestDonationList,\ RequestDonation,\ Beneficiary,\ double,\ int)
 numComments=6

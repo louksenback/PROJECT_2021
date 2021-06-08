@@ -8,14 +8,14 @@ public class Material extends Entity
     public Material(String Name, String description, int id)
     {
         super(Name, description, id);
-        this.level1 = 3.0;
-        this.level2 = 9.0;
+        this.level1 = 5.0;
+        this.level2 = 10.0;
         this.level3 = 15.0;
     }
 
     //Method
     
-    public double getlevel(Beneficiary a)
+    public double getlevel(Beneficiary a) throws ExceptionLevel
     {
         if(a.getNoPersons() == 1)
         {
@@ -31,8 +31,7 @@ public class Material extends Entity
         }
         else
         {
-            //exception
-            return 0.0;
+            throw new ExceptionLevel("Πρέπει να δώσετε αριθμό μεγαλύτερο από 1!");
         }
     }
     public String getDetails()

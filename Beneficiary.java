@@ -20,7 +20,7 @@ public class Beneficiary extends User
     //Methods
     public void setnoPersons()
     {
-        System.out.println("Dwse ton arithmo twn atomwn: ");
+        System.out.println("Δώσε τον αριθμό των ατόμων: ");
         Scanner s = new Scanner(System.in);
         noPersons = s.nextInt();
         if(noPersons == 1)
@@ -48,25 +48,47 @@ public class Beneficiary extends User
     {
         return requestsList;
     }
-    
-    
     public void add(RequestDonation a, double quantity)
     {
         RequestDonation p = new RequestDonation(a.getEntity(), quantity);
         requestsList.rdEntities.add(p);
     }
-    
-    
-    
-    public double calculation(RequestDonation a)
+    public void modify(RequestDonation s, double quantity)
     {
-        if(receivedList.rdEntities.contains(a))
+        if(requestsList.rdEntities.contains(s))
         {
-            return a.getquantity();
-        }
+            s.addquantity(quantity);
+        } 
         else
         {
-            return 0.0;
+            requestsList.rdEntities.add(s);
         }
+    }
+    public void removeRequestsList(RequestDonation c)
+    {
+        requestsList.rdEntities.remove(c);
+    }
+    public void reset()
+    {
+        requestsList.rdEntities.clear();
+    }
+    public void monitorRequestsList()
+    {
+        for(int i=0; i < requestsList.rdEntities.size();i++)
+        { 
+            System.out.println(requestsList.rdEntities.get(i).getEntity().getName() + " "+ "(" + requestsList.rdEntities.get(i).getquantity() + ")");
+        }
+    }
+    public double calculation(RequestDonation a)
+    {
+        int check = 0;
+        for(int i = 0; i < getReceivedList().rdEntities.size(); i++)
+        {
+            if(receivedList.rdEntities.contains(a))
+            {
+                return getReceivedList().rdEntities.get(i).getquantity();
+            }
+        }
+        return 0.0;
     }
 }

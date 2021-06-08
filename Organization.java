@@ -16,30 +16,48 @@ public class Organization
     }
     public String getAdmin()
     {
-        return "\t\t\t\t\t" + admin + "\n\t\t\t\t\t" + name; 
+        return "\t\t\t\t\t" + name + "\n\t\t\t\t\t" + admin.getphone(); 
     }
-    public void addEntity(Entity e)
+    public void addEntity(Entity e) throws ExceptionOrganization
     {
-        entityList.add(e);
-        //exception 
+        if(entityList.contains(e))
+        {
+            throw new ExceptionOrganization("Το είδος που εισήγατε υπάρχει ήδη στη λίστα!");
+        }
+        else
+        {
+            entityList.add(e);
+        }
     }
     void removeEntity(Entity f)
     {
         entityList.remove(f);
     }
-    public void insertDonator(Donator g)
+    public void insertDonator(Donator g) throws ExceptionOrganization
     {
-        donatorList.add(g);
-        //exception
+        if(entityList.contains(g))
+        {
+            throw new ExceptionOrganization("Ο δωρητής που εισήγατε υπάρχει ήδη στη λίστα!");
+        }
+        else
+        {
+            donatorList.add(g);
+        }
     }
     public void removeDonator(Donator h)
     {
         donatorList.remove(h);
     }
-    public void insertBeneficiary(Beneficiary i)
+    public void insertBeneficiary(Beneficiary i) throws ExceptionOrganization
     {
-        beneficiaryList.add(i);
-         //exception
+        if(entityList.contains(i))
+        {
+            throw new ExceptionOrganization("Ο επωφελούμενος που εισήγατε υπάρχει ήδη στη λίστα!");
+        }
+        else
+        {
+            beneficiaryList.add(i);
+        }
     }
     public void removeBeneficiary (Beneficiary j)
     {
@@ -47,9 +65,9 @@ public class Organization
     }
     public void listEntities()
     {
-        System.out.println("Οι κατηγορίες των entities είναι: 1) Material, 2) Service");
+        System.out.println("Οι κατηγορίες των ειδών είναι: 1) Material, 2) Service");
         System.out.println("\n1. Material(s):");
-        for(int k = 0; k<entityList.size(); k++)
+        for(int k = 0; k < entityList.size(); k++)
         {
             if(returnClass(k) == "Material")
             {
@@ -57,7 +75,7 @@ public class Organization
             }
         }
         System.out.println("\n2. Sevice(s):");
-        for(int l = 0; l<entityList.size(); l++)
+        for(int l = 0; l < entityList.size(); l++)
         {
             if(returnClass(l) == "Service")
             {
@@ -65,30 +83,6 @@ public class Organization
             }
         }
     }
-    
-    
-    public void listCurrentDonations()
-    {
-        System.out.println("Οι κατηγορίες των ειδών προς δωρεά είναι: 1) Material, 2) Service");
-        System.out.println("\n1. Material(s):");
-        for(int i = 0; i<currentDonations.rdEntities.size(); i++)
-        {
-            if(returnClass(i) == "Material")
-            {
-                System.out.println(currentDonations.rdEntities.get(i).getEntity().getName());
-            }
-        }
-        System.out.println("\n2. Sevice(s):");
-        for(int i = 0; i<currentDonations.rdEntities.size(); i++)
-        {
-            if(returnClass(i) == "Service")
-            {
-                System.out.println(currentDonations.rdEntities.get(i).getEntity().getName());
-            }
-        }
-    }
-    
-    
     public void listBeneficiaries()
     {
         for(int l = 0; l<beneficiaryList.size(); l++)
@@ -115,7 +109,7 @@ public class Organization
         }
         return 0;
     }
-    public int beneficiaryphone(int phone)
+    public int returnbeneficiary(int phone)
     {
         for(int i = 0; i < beneficiaryList.size(); i++)
         {
@@ -127,17 +121,17 @@ public class Organization
         }
         return 0;
     }
-    public Donator returnDonator(int phone)
+    public int returnDonator(int phone)
     {
         for(int i = 0; i < donatorList.size(); i++)
         {
             int j = Integer.parseInt(donatorList.get(i).getphone());
             if(j == phone)
             {
-                return donatorList.get(i);
+                return phone;
             }
         }
-        return donatorList.get(0); //exception
+        return 0;
     }
     public String returnClass(int i)
     {
