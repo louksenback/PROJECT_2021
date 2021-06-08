@@ -11,16 +11,15 @@ public class Menu
         p = a.nextInt();
         if(org.returnDonator(p) == p)
         {
-            org.returnDonator(p);
             Donator(org, RDL, d, b, o, r);
         }
         else if(org.returnbeneficiary(p) == p)
         {
             Beneficiary(org, RDL, d, b, o, r);
         }
-        else if(org.getAdmin() == "true")
+        else if(org.returnAdmin(p) == true)
         {
-            System.out.println("Είστε ο Διαχειριστής!");
+            Admin(org, RDL, d, b, o, r);
         }
         else
         {
@@ -146,6 +145,32 @@ public class Menu
                 DC5(org, RDL, d, b, o, r);
                 break;
             case 6:
+                DC6();
+                break;
+        }
+    }
+    public void Admin(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o, Requests r)
+    {
+        System.out.println("===================================================\n\n");
+        System.out.println("Είστε ο Διαχειριστής!\n\n");
+        System.out.println("1. View\n2. Monitor Organization\n3. Back\n4. logout\n5. exit");
+        System.out.println("\n\n===================================================");
+        System.out.print("Επιλέξτε μία ενέργεια από το μενού πατώντας τον αντίστοιχο αριθμο (1 - 5): ");
+        switch(ScannerInt())
+        {
+            case 1:
+                AD1(org, RDL, d, b, o, r);
+                break;
+            case 2:
+                AD2(org, RDL, d, b, o, r);
+                break;
+            case 3:
+                DC4(org, RDL, d, b, o, r, 1);
+                break;
+            case 4:
+                DC5(org, RDL, d, b, o, r);
+                break;
+            case 5:
                 DC6();
                 break;
         }
@@ -284,6 +309,9 @@ public class Menu
             case 5:
                 BC2(org, RDL, d, b, o, r);
                 break;
+            case 6:
+                AD1(org, RDL, d, b, o, r);
+                break;
         }
     }
     public void DC5(Organization org, RequestDonationList RDL,  Donator d, Beneficiary b, Offers o, Requests r)
@@ -403,6 +431,138 @@ public class Menu
         System.out.println("Έχετε πραγματοποιήσει επιτυχώς το αίτημα σας!");
         Beneficiary(org, RDL, d, b, o, r);
     }
+    public void AD1(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o, Requests r)
+    {
+        System.out.println("===================================================\n\n");
+        System.out.println("Material(s)\n\n");
+        RDL.listMaterials();
+        System.out.println("Service(s)\n\n");
+        RDL.listServices();
+        System.out.println("3. Back");
+        System.out.println("\n\n===================================================");
+        switch(ScannerInt())
+        {
+            case 1:
+                System.out.println("Material(s)\n\n");
+                RDL.listMaterials();
+                switch(ScannerInt())
+                {
+                    case 1:
+                        casesForAdmin(org, RDL, d, b, o, r, 0);
+                        break;
+                    case 2:
+                        casesForAdmin(org, RDL, d, b, o, r, 1);
+                        break;
+                    case 3:
+                        casesForAdmin(org, RDL, d, b, o, r, 2);
+                        break;
+                    case 4:
+                        DC4(org, RDL, d, b, o, r, 6);
+                        break;
+                }
+                break;
+            case 2:
+                System.out.println("Service(s)\n\n");
+                RDL.listServices();
+                switch(ScannerInt())
+                {
+                    case 1:
+                        casesForAdmin(org, RDL, d, b, o, r, 3);
+                        break;
+                    case 2:
+                        casesForAdmin(org, RDL, d, b, o, r, 4);
+                        break;
+                    case 3:
+                        casesForAdmin(org, RDL, d, b, o, r, 5);
+                        break;
+                    case 4:
+                        DC4(org, RDL, d, b, o, r, 6);
+                        break;
+                }
+                break;
+            case 3:
+                DC4(org, RDL, d, b, o, r, 6);
+                break;
+        }
+    }
+    public void AD2(Organization org,RequestDonationList RDL , Donator d, Beneficiary b, Offers o, Requests r)
+    {
+        System.out.println("Επιλογές για τους επωφελούμενους.");
+        System.out.println("Επιλογες για τους δωρητές.");
+        System.out.println("Καθαρισμός λιστών αιτημάτων των επωφελούμενων.");
+        System.out.println("Επιλέξτε μία ενέργεια από το μενού πατώντας τον αντίστοιχο αριθμο (1 - 3): ");
+        switch(ScannerInt())
+        {
+            case 1:
+                System.out.println("Εμφανίστε την τρέχουσα κατάσταση των συνολικών παραχών ενός επωφελούμενου!");
+                System.out.println("Καθαρίστε την λίστα των παραχών του επωφελούμενου.");
+                System.out.println("Διαγράψτε τον επωφελούμενο");
+                switch(ScannerInt())
+                {
+                    case 1:
+                        org.listBeneficiaries();
+                        switch((1 <= p && p <= 100) ? 1 : (101 <= p && p <= 10000) ? 2 : 3)
+                        {
+                            case 1:
+                                for(int i = 0; i < org.beneficiaryList.size(); i++)
+                                {
+                                    System.out.println(org.beneficiaryList.get(p).getReceivedList().rdEntities.get(i).getEntity().getName() + " (" + org.beneficiaryList.get(p).getReceivedList().rdEntities.get(i).getquantity() + ")");
+                                }
+                                AD2(org, RDL, d, b, o, r);
+                                break;
+                        }
+                        break;
+                    case 2:
+                        switch((1 <= p && p <= 100) ? 1 : (101 <= p && p <= 10000) ? 2 : 3)
+                        {
+                            case 1:
+                                org.beneficiaryList.get(p).reset();
+                                AD2(org, RDL, d, b, o, r);
+                                break;
+                        }
+                        break;
+                    case 3:
+                        switch((1 <= p && p <= 100) ? 1 : (101 <= p && p <= 10000) ? 2 : 3)
+                        {
+                            case 1:
+                                org.removeBeneficiary(org.beneficiaryList.get(p));
+                                AD2(org, RDL, d, b, o, r);
+                                break;
+                        }   
+                        break;
+                }
+                AD2(org, RDL, d, b, o, r);
+                break;
+            case 2:
+                org.listDonators();
+                switch((1 <= p && p <= 100) ? 1 : (101 <= p && p <= 10000) ? 2 : 3)
+                {
+                    case 1:
+                        System.out.println("Εμφανίστε την λίστα των παραχών που προτίθεται να προσφέρει ο δωρητής.");
+                        System.out.println("Διαγραψτε αυτόν τον δωρητή");
+                        switch(ScannerInt())
+                        {
+                            case 1:
+                            for(int i = 0; i < org.donatorList.size(); i++)
+                            {
+                                System.out.println(org.donatorList.get(p).getoffersList().rdEntities.get(i).getEntity().getName() + " (" + org.donatorList.get(p).getoffersList().rdEntities.get(i).getquantity() + ")");
+                            }   
+                                break;
+                            case 2:
+                                org.removeDonator(org.donatorList.get(p));
+                                break;
+                        }
+                        break;
+                }
+                break;
+            case 3:
+                for(int j = 0; j < org.beneficiaryList.size(); j++)
+                {
+                    org.beneficiaryList.get(j).reset();
+                }
+                break;
+        }
+    }
     public void casesForBeneficiary(Organization org,RequestDonationList RDL , Donator d, Beneficiary b, Offers o, Requests r, int i)
     {
         System.out.println(RDL.rdEntities.get(i).getEntity().getEntityInfo());
@@ -436,6 +596,11 @@ public class Menu
                 Donator(org, RDL, d, b, o, r);
                 break;
         }
+    }
+    public void casesForAdmin(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o, Requests r, int i)
+    {
+        System.out.println(RDL.rdEntities.get(i).getEntity().toString());
+        Admin(org, RDL, d, b, o, r);
     }
     public int ScannerInt()
     {

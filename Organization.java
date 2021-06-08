@@ -87,14 +87,14 @@ public class Organization
     {
         for(int l = 0; l<beneficiaryList.size(); l++)
         {
-            System.out.println(beneficiaryList.get(l).getname() + " " + beneficiaryList.get(l).getphone());
+            System.out.println((l + 1) + ") " + beneficiaryList.get(l).getname() + " " + beneficiaryList.get(l).getphone());
         }
     }
     public void listDonators()
     {
         for(int m = 0; m<donatorList.size(); m++)
         {
-            System.out.println(donatorList.get(m).getname() + " " + donatorList.get(m).getphone());
+            System.out.println((m + 1) + ") " + donatorList.get(m).getname() + " " + donatorList.get(m).getphone());
         }
     }
     public int returnbeneficiary(int phone)
@@ -120,6 +120,15 @@ public class Organization
             }
         }
         return 0;
+    }
+    public boolean returnAdmin(int phone)
+    {
+        int j = Integer.parseInt(admin.getphone());
+        if(j == phone)
+        {
+            return admin.getAdmin();
+        }
+        return false;
     }
     public String returnClass(int i)
     {

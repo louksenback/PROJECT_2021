@@ -7,7 +7,7 @@ public class main
         RequestDonationList RDL = new RequestDonationList();
         Offers o = new Offers();
         Requests r = new Requests();
-        Admin a = new Admin("Programmers", "0");
+        Admin a = new Admin("Programmers", "123");
         org.setAdmin("Programmers", a);
         
         Material Milk = new Material("Γάλα", "Αγελαδίσιο Γάλα", 1826);
