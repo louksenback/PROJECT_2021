@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class Menu
 {
-    int p;
+    private int p;
     public void checkuser(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o, Requests r)
     { 
         System.out.println("===================================================\n\n");
@@ -9,7 +9,7 @@ public class Menu
         System.out.println("\n\n===================================================");
         Scanner a = new Scanner(System.in);
         p = a.nextInt();
-        if(org.donatorPhone(p) == p)
+        if(org.returnDonator(p) == p)
         {
             org.returnDonator(p);
             Donator(org, RDL, d, b, o, r);
@@ -72,7 +72,7 @@ public class Menu
             }
         }
     }
-    public void Beneficiary(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o, Requests r) // ********************
+    public void Beneficiary(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o, Requests r)
     {
         System.out.println("===================================================");
         System.out.println("\t  Organization: Make it possible!\n\n");//onoma organismou
@@ -264,7 +264,6 @@ public class Menu
         o.commit(RDL, org, d);
         System.out.println("Η δωρεά σας κατοχυρώθηκε στον οργανισμό μας. Σας ευχαριστούμε θερμά!");
         Donator(org, RDL, d, b, o, r);
-        RDL.monitor();
     }
     public void DC4(Organization org, RequestDonationList RDL, Donator d, Beneficiary b, Offers o, Requests r, int a)
     {
@@ -284,6 +283,7 @@ public class Menu
                 break;
             case 5:
                 BC2(org, RDL, d, b, o, r);
+                break;
         }
     }
     public void DC5(Organization org, RequestDonationList RDL,  Donator d, Beneficiary b, Offers o, Requests r)
@@ -458,7 +458,6 @@ public class Menu
     public String IntToString(int p)
     {
         String s = Integer.toString(p);
-        System.out.println(s);
         return s;
     }
     public int StringToInt(String p)

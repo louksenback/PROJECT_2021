@@ -76,12 +76,11 @@ public class Beneficiary extends User
     {
         for(int i=0; i < requestsList.rdEntities.size();i++)
         { 
-            System.out.println(requestsList.rdEntities.get(i).getEntity().getName() + " "+ "(" + requestsList.rdEntities.get(i).getquantity() + ")");
+            System.out.println((i+1) + ") " + requestsList.rdEntities.get(i).getEntity().getName() + " "+ "(" + requestsList.rdEntities.get(i).getquantity() + ")");
         }
     }
     public double calculation(RequestDonation a)
     {
-        int check = 0;
         for(int i = 0; i < getReceivedList().rdEntities.size(); i++)
         {
             if(receivedList.rdEntities.contains(a))

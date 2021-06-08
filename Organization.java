@@ -29,7 +29,7 @@ public class Organization
             entityList.add(e);
         }
     }
-    void removeEntity(Entity f)
+    public void removeEntity(Entity f)
     {
         entityList.remove(f);
     }
@@ -87,27 +87,15 @@ public class Organization
     {
         for(int l = 0; l<beneficiaryList.size(); l++)
         {
-            System.out.println(beneficiaryList.get(l));
+            System.out.println(beneficiaryList.get(l).getname() + " " + beneficiaryList.get(l).getphone());
         }
     }
     public void listDonators()
     {
         for(int m = 0; m<donatorList.size(); m++)
         {
-            System.out.println(donatorList.get(m));
+            System.out.println(donatorList.get(m).getname() + " " + donatorList.get(m).getphone());
         }
-    }
-    public int donatorPhone(int phone)
-    {
-        for(int i = 0; i < donatorList.size(); i++)
-        {
-            int j = Integer.parseInt(donatorList.get(i).getphone());
-            if(j == phone)
-            {
-                return phone;
-            }
-        }
-        return 0;
     }
     public int returnbeneficiary(int phone)
     {

@@ -21,10 +21,6 @@ public class RequestDonation implements Comparator <Entity>
     {
         this.quantity += quantity;
     }
-    public void removequantity(double quantity)
-    {
-        this.quantity -= quantity;
-    }
     public double getquantity()
     {
         return this.quantity;

@@ -42,17 +42,17 @@ class RequestDonationList
         if(check == rdEntities.size())
         {
             rdEntities.add(b);
-        }
-        try
-        {
-            if(org.entityList.contains(b.getEntity()))
+                try
             {
-                throw new ExceptionOrganization("Το είδος που εισήγατε υπάρχει ήδη στη λίστα!");
+                if(org.entityList.contains(b.getEntity()))
+                {
+                    throw new ExceptionOrganization("Το είδος που εισήγατε υπάρχει ήδη στη λίστα!");
+                }
             }
-        }
-        catch(ExceptionOrganization eo)
-        {
-            System.err.print(eo);
+            catch(ExceptionOrganization eo)
+            {
+                System.err.print(eo);
+            }
         }
     }
     public void remove(RequestDonation c)
@@ -62,10 +62,6 @@ class RequestDonationList
     public void modify(RequestDonation d, double quantity)
     {
         d.addquantity(quantity);
-    }
-    public void modifyremove(RequestDonation d, double quantity)
-    {
-        d.removequantity(quantity);
     }
     public void monitor()
     {

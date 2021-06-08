@@ -109,13 +109,10 @@ class Requests extends RequestDonationList
         try
         {
             check(RDL, a, b, quantity, i);
-            System.out.println(RDL.rdEntities.size());
             for(int j = 0; j < RDL.rdEntities.size(); j++)
             {
-                System.out.println("fffffffffff");
                 if(b.getReceivedList().rdEntities.get(i).getEntity().getId() == RDL.rdEntities.get(j).getEntity().getId())
                 {
-                    System.out.println("iiiiiiiiii");
                     RDL.rdEntities.get(j).addquantity(-quantity);
                 }
             }
